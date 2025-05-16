@@ -76,8 +76,9 @@ An example for a smaller `gridSize` of 4 units could be as follows:
 ```
 But note that the actual `gridSize` for the game is larger (as specified in the beginning).
 ## Output Format
-On each turn both players must provide a single line of ouput specifying their move in the following format:  
-`MOVE <direction> BOMB <x> <y> ATTACK <x> <y>`
+On each turn both players must provide a single line of output specifying their move in the following format:  
+`MOVE <direction> BOMB <x> <y> ATTACK <x> <y>` followed by a newline character.  
+**Terminating with a newline character is necessary and very important to signal to the engine the end of your input.**
 
 * `<direction>` must be one of the following strings: `UP`, `DOWN`, `LEFT`, `RIGHT`.  
 * The `<x>` and `<y>` following `BOMB` are the coordinates of the cell you wish to bomb. If you cannot or do not wish to bomb any square then both of these integers must equal `-1`.
