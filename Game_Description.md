@@ -31,7 +31,7 @@ Details on the moves you may make are as follows:
 $|x_1 - x_2| + |y_1 - y_2|$  
 where the coordinates of the cells are $(x_1, y_1)$ and $(x_2, y_2)$.   
 Bombs are used to destroy crystals. Before the next turn the bomb will explode, affecting the target cell and two cells adjacent to it horizontally and vertically.  
-![image](bomb_eg.png)  
+![image](images/bomb_eg.png)  
 For example, in the above image, the bomb was placed at '**B**' and '**O**' denotes an obstacle. The explosion cannot pass through **obstacles**. All the affected cells are marked red.  
 If a crystal is present among the affected cells then it will be acquired by the player who placed the bomb and on the next turn the crystal will be gone, leaving an empty cell in its place.  
 If the crystal was in the affected range of **both players** simultaneously then the crystal will be gone but neither player will get it.  
