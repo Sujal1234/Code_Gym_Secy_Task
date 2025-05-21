@@ -78,7 +78,12 @@ But note that the actual `gridSize` for the game is larger (as specified in the 
 ## Output Format
 On each turn both players must provide a single line of output specifying their move in the following format:  
 `MOVE <direction> BOMB <x> <y> ATTACK <x> <y>` followed by a newline character.  
-**Terminating with a newline character is necessary and very important to signal to the engine the end of your input.**
+
+* **Terminating with a newline character** is necessary and very important to signal to the engine the end of your input.
+
+* Make sure to **flush your output** to **stdout**. In C++ this can be done with: `fflush(stdout)` or to enter a newline character while simultaneously flushing the output send `std::endl` into `std::cout`.
+
+* You must send your output within **$1$ second** of receiving input from the engine. Failing to do so will result in an immediate loss. Note that failing to flush your output or failing to send a newline character to terminate your output may also lead to this.
 
 * `<direction>` must be one of the following strings: `UP`, `DOWN`, `LEFT`, `RIGHT`.  
 * The `<x>` and `<y>` following `BOMB` are the coordinates of the cell you wish to bomb. If you cannot or do not wish to bomb any square then both of these integers must equal `-1`.
