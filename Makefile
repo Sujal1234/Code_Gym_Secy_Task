@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -Wall -Wextra -Wpedantic -Wshadow -Wnon-virtual-dtor \
 		   -Wcast-align -Wunused -Woverloaded-virtual -Wconversion -Wsign-conversion \
 		   -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wnull-dereference \
-		   -Wuseless-cast -Wdouble-promotion -Wformat=2 -pedantic -std=c++20
+		   -Wuseless-cast -Wdouble-promotion -Wformat=2 -pedantic -g -std=c++20
 DEPFLAGS = -MMD -MP
 
 TARGET = engine
