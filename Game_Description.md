@@ -41,10 +41,15 @@ The bombs being weak and designed to only harvest crystals, will not affect eith
 
 ## Win/Lose Conditions
 One of the following situations may arise:
-* All the crystals in the area are gone (either collected or destroyed). In this case the player with the **greater number of crystals** wins. If both players have the same number of crystals, the player with the **higher HP** remaining wins. If both players have the same **HP** it is a tie.  
-* 250 turns have passed and there are still crystals remaining. In this case again the player with the **greater number of crystals** wins. If both players have the same number of crystals, the player with the **higher HP** remaining wins. If both players have the same $HP$ it is a **tie**.
+* A player provides an output string that does not follow the mentioned format, attempts to make a move disallowed by the rules or does not send the input within the time limit (1 second). Then, that player **immediately loses**. If this happens to both players on the same turn then it is a **tie**.
+
 * The $HP$ of one of the players **dropped to $0$**. Then the other player automatically wins regardless of the number of crystals they possess. However, if both players' $HP$ drops to $0$ on the same turn then it is a **tie** regardless of the number of crystals possessed.
-* A player provides an output string that does not follow the mentioned format or attempts to make a move disallowed by the rules. Then, that player **immediately loses**. If this happens to both players on the same turn then it is a **tie**.
+
+* All the crystals in the area are gone (either collected or destroyed). In this case the player with the **greater number of crystals** wins. If both players have the same number of crystals, the player with the **higher HP** remaining wins. If both players have the same **HP** it is a tie.
+
+* 250 turns have passed and there are still crystals remaining. In this case again the player with the **greater number of crystals** wins. If both players have the same number of crystals, the player with the **higher HP** remaining wins. If both players have the same $HP$ it is a **tie**.
+
+
 
 ## Game Input
 * The first line will be your opponent's movement. It will be in the format `MOVE <direction>` (E.g `MOVE UP`).   
