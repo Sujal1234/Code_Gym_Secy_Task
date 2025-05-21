@@ -1,5 +1,5 @@
 # Crystal Warfare
-India and Pakistan are at war and are out to make weapons of mass destruction. There is one piece of technology which could turn the tide of the war for the country with access to it - Chalmorite crystals.
+India and Pakistan are at war and are out to make weapons of mass destruction. There is one piece of technology which could turn the tide of the war for the country with access to it - Chalcorite crystals.
 
 You are a soldier of the Indian army and your task is to scout a Chalcorite-rich area and collect as many crystals as possible. But there's a catch - Pakistan has sent their own soldier too. 
 
