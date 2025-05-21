@@ -26,14 +26,14 @@ Details on the moves you may make are as follows:
 
 * As both players are wearing specially designed invisibility suits they cannot see each other's position, even if they are on the same cell.
 
-* Using the **`BOMB`** followed by map coordinates `x`, `y` players may place a bomb within a 3-cell range of their position, i.e, the **manhattan distance** between the target cell and their current position is $\leq 3$. There is a $4$ turn cooldown before a player may use the command again, i.e, it can be used on the $5^{th}$  turn after the current one.   
+* Using the **`BOMB`** followed by map coordinates `x`, `y` players may place a bomb on an **empty cell** within a 3-cell range of their position, i.e, the **manhattan distance** between the target cell and their current position is $\leq 3$. There is a $4$ turn cooldown before a player may use the command again, i.e, it can be used on the $5^{th}$  turn after the current one.   
 **Manhattan distance** between two cells is calculated as follows:  
 $|x_1 - x_2| + |y_1 - y_2|$  
 where the coordinates of the cells are $(x_1, y_1)$ and $(x_2, y_2)$.   
-Bombs are used to destroy crystals. Before the next turn the bomb will explode, affecting the target cell and two cells adjacent to it horizontally and vertically.  
+* Bombs are used to destroy crystals. Before the next turn the bomb will explode, affecting the target cell and two cells adjacent to it horizontally and vertically.  
 ![image](images/bomb_eg.png)  
 For example, in the above image, the bomb was placed at '**B**' and '**O**' denotes an obstacle. The explosion cannot pass through **obstacles**. All the affected cells are marked red.  
-If a crystal is present among the affected cells then it will be acquired by the player who placed the bomb and on the next turn the crystal will be gone, leaving an empty cell in its place.  
+* If a crystal is present among the affected cells then it will be acquired by the player who placed the bomb and on the next turn the crystal will be gone, leaving an empty cell in its place.  
 If the crystal was in the affected range of **both players** simultaneously then the crystal will be gone but neither player will get it.  
 The bombs being weak and designed to only harvest crystals, will not affect either of the players.
 
