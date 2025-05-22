@@ -2,6 +2,8 @@
 #include <iostream>
 #include <random>
 #include <string>
+#include <string_view>
+#include <sstream>
 #include <array>
 
 Engine::Engine(unsigned seed)
@@ -39,12 +41,8 @@ void Engine::initialiseGrid(){
     std::uniform_real_distribution<float> disMult(0, 0.1);
     float obstacleMultiplier = disMult(rng);
 
-    std::cerr << "Obstacle Multiplier: " << obstacleMultiplier << std::endl;
-
     //Randomly place obstacles in 0% - 10% of the grid
     int obstacleCount = static_cast<int>(GRID_SIZE * GRID_SIZE * obstacleMultiplier);
-
-    std::cerr << "Obstacle Count: " << obstacleCount << std::endl;
 
     std::uniform_int_distribution<int> disGrid(0, GRID_SIZE - 1);
     int x, y;
@@ -89,6 +87,54 @@ void Engine::initialiseGrid(){
     } while (!isEmptyCell(player2X, player2Y));
 }
 
+//Returns true if the input format is valid, false otherwise.
+bool Engine::parseMove(const std::string_view input, std::string& move, 
+    int& bombX, int& bombY, int& attackX, int& attackY) const {
+        std::stringstream ss(input.data());
+
+        std::string moveStr, attackStr, bombStr;
+
+        if(!(ss >> moveStr) || moveStr !=  "MOVE"){
+            return false;
+        }
+
+        if(!(ss >> move) || 
+        (move != "UP" && move != "DOWN" &&
+         move != "LEFT" && move != "RIGHT")){
+            return false;
+        }
+
+        if(!(ss >> bombStr) || bombStr != "BOMB"){
+            return false;
+        }
+        if(!(ss >> bombX) || !(ss >> bombY)){
+            return false;
+        }
+        if(!isValidPosition(bombX, bombY)){
+            if(!(bombX == -1 && bombY == -1)){ //Bomb not used
+                return false;
+            }
+        }
+
+        if(!(ss >> attackStr) || attackStr != "ATTACK"){
+            return false;
+        }
+        if(!(ss >> attackX) || !(ss >> attackY)){
+            return false;
+        }
+        if(!isValidPosition(attackX, attackY)){
+            if(!(attackX == -1 && attackY == -1)){ //Attack not used
+                return false;
+            }
+        }
+
+        std::string remaining;
+        if(ss >> remaining){
+            return false; //Extra input
+        }
+        return true;
+}
+
 void Engine::printGrid() const {
     for (int y = 0; y < GRID_SIZE; y++)
     {
@@ -110,6 +156,6 @@ std::array<std::array<char, GRID_SIZE>, GRID_SIZE> Engine::getGrid() const{
     return grid;
 }
 
-int Engine::getTotalCrystals(){
+int Engine::getTotalCrystals() const{
     return totalCrystals;
 }

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <string_view>
 #include <array>
 #include <random>
 #include <ctime>
@@ -26,11 +27,16 @@ private:
     int player1Crystals {}, player2Crystals {};
     int player1BombCooldown {}, player1AttackCooldown {};
     int player2BombCooldown {}, player2AttackCooldown {};
+
     int totalCrystals;
     int currentTurn {};
+    
+    std::string lastPlayer1Move {};
+    std::string lastPlayer2Move {};
+
     bool gameOver {false};
-    std::string lastPlayer1Move;
-    std::string lastPlayer2Move;
+    bool player1Lost {false};
+    bool player2Lost {false};
 
     std::string endReason;
 
@@ -41,16 +47,23 @@ private:
     bool isObstacleCell(int x, int y) const;
     int manhattanDistance(int x1, int y1, int x2, int y2) const;
 
-    std::mt19937 rng; //Random number generator    
+    std::mt19937 rng; //Random number generator
+
+    //Take the input string and retrieve the details of the move.
+    //Returns true if the input format is valid, false otherwise.
+    
     
 public:
     Engine(unsigned seed = static_cast<unsigned>(std::time(nullptr)));
+
+    bool parseMove(const std::string_view input, std::string& move,
+    int& bombX, int& bombY, int& attackX, int& attackY) const;
 
     void initialiseGrid();
     void printGrid() const;
 
     //Getter functions
     std::array<std::array<char, GRID_SIZE>, GRID_SIZE> getGrid() const;
-    int getTotalCrystals();
+    int getTotalCrystals() const;
 };
 #endif //engine_h
