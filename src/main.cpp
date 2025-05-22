@@ -7,6 +7,7 @@
 #include <sstream>
 
 #include "../include/util.h"
+#include "../include/engine.h"
 
 namespace bp = boost::process;
 namespace asio = boost::asio;
@@ -34,7 +35,7 @@ int main(int argc, char* argv[]){
     
     bool gameOver {false};
 
-    //TODO: GAME SETUP  
+    //TODO: GAME SETUP
     while(bot1.running() && bot2.running()){
         std::optional<std::string> bot1Output = readPipeDeadline(
             bot1_out, ctx1, boost::posix_time::seconds(responseTimeLimit)

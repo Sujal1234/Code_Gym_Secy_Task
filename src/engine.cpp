@@ -1,59 +1,115 @@
-#include <boost/process.hpp>
-#include <boost/asio.hpp>
-#include <boost/system.hpp>
-
+#include "../include/engine.h"
 #include <iostream>
+#include <random>
 #include <string>
-#include <sstream>
+#include <array>
 
-#include "../include/util.h"
+Engine::Engine(unsigned seed)
+{
+    rng.seed(seed);
+    initialiseGrid();
+}
 
-namespace bp = boost::process;
-namespace asio = boost::asio;
+bool Engine::isValidPosition(int x, int y) const {
+    return x >= 0 && x < GRID_SIZE && y >= 0 && y < GRID_SIZE;
+}
 
-int main(int argc, char* argv[]){
-    //Usage: ./engine bot1.cpp bot2.cpp
+bool Engine::isEmptyCell(int x, int y) const {
+    return isValidPosition(x, y) && grid[y][x] == '.';
+}
 
-    if(argc != 3){
-        std::cerr << "Usage: ./engine path_to_bot1.cpp path_to_bot2.cpp\n";
-        std::exit(1);
+bool Engine::isCrystalCell(int x, int y) const {
+    return isValidPosition(x, y) && grid[y][x] == 'C';
+}
+
+bool Engine::isObstacleCell(int x, int y) const {
+    return isValidPosition(x, y) && grid[y][x] == '#';
+}
+
+int Engine::manhattanDistance(int x1, int y1, int x2, int y2) const {
+    return std::abs(x1 - x2) + std::abs(y1 - y2);
+}
+
+void Engine::initialiseGrid(){
+    for (int i = 0; i < GRID_SIZE; i++)
+    {
+        grid[i].fill('.');
     }
 
-    buildCpp(argv[1], "bot1");
-    buildCpp(argv[2], "bot2");
+    std::uniform_real_distribution<float> disMult(0, 0.1);
+    float obstacleMultiplier = disMult(rng);
 
-    asio::io_context ctx1;
-    asio::io_context ctx2;
+    std::cerr << "Obstacle Multiplier: " << obstacleMultiplier << std::endl;
+
+    //Randomly place obstacles in 0% - 10% of the grid
+    int obstacleCount = static_cast<int>(GRID_SIZE * GRID_SIZE * obstacleMultiplier);
+
+    std::cerr << "Obstacle Count: " << obstacleCount << std::endl;
+
+    std::uniform_int_distribution<int> disGrid(0, GRID_SIZE - 1);
+    int x, y;
+
+    for (int i = 0; i < obstacleCount; i++)
+    {
+        do{
+            x = disGrid(rng);
+            y = disGrid(rng);
+        } while (!isEmptyCell(x, y));
+
+        grid[y][x] = '#';
+    }
+
+    std::uniform_int_distribution<int> disCrystal(0, 9);
+    totalCrystals = MIN_CRYSTALS  + disCrystal(rng);
+    if(totalCrystals % 2 == 0){
+        totalCrystals++; //Ensure odd number of crystals
+    }
+
+    //Randomly place crystals in the grid
+    for (int i = 0; i < totalCrystals; i++)
+    {
+        do{
+            x = disGrid(rng);
+            y = disGrid(rng);
+        } while (!isEmptyCell(x, y));
+
+        grid[y][x] = 'C';
+    }
+
+    //Place players in opposite halves (left/right) of the grid
+    std::uniform_int_distribution<int> disGridHalf(0, GRID_SIZE / 2 - 1);
+    do {
+        player1X = disGridHalf(rng);
+        player1Y = disGridHalf(rng);
+    } while (!isEmptyCell(player1X, player1Y));
     
-    bp::async_pipe bot1_out{ctx1}, bot2_out{ctx2};
-    bp::opstream bot1_in, bot2_in;
+    do {
+        player2X = (GRID_SIZE / 2) + disGridHalf(rng);
+        player2Y = (GRID_SIZE / 2) + disGridHalf(rng);
+    } while (!isEmptyCell(player2X, player2Y));
+}
 
-    
-    bp::child bot1("bin/bot1", bp::std_out > bot1_out, bp::std_in < bot1_in, ctx1);
-    bp::child bot2("bin/bot2", bp::std_out > bot2_out, bp::std_in < bot2_in, ctx2);
-    
-    bool gameOver {false};
-
-    //TODO: GAME SETUP  
-    while(bot1.running() && bot2.running()){
-        std::optional<std::string> bot1Output = readPipeDeadline(
-            bot1_out, ctx1, boost::posix_time::seconds(responseTimeLimit)
-        );
-        std::optional<std::string> bot2Output= readPipeDeadline(
-            bot2_out, ctx2, boost::posix_time::seconds(responseTimeLimit)
-        );
-
-        if(!bot1Output.has_value() || !bot2Output.has_value()){
-            gameOver = true;
-            bot1.terminate();
-            bot2.terminate();
-            std::cerr << "No output received from one of the bots." << std::endl;
-            break;
+void Engine::printGrid() const {
+    for (int y = 0; y < GRID_SIZE; y++)
+    {
+        for (int x = 0; x < GRID_SIZE; x++)
+        {
+            if (x == player1X && y == player1Y)
+                std::cout << '1';
+            else if (x == player2X && y == player2Y)
+                std::cout << '2';
+            else
+                std::cout << grid[y][x];
         }
-        //Do stuff with input
+        std::cout << '\n';
     }
-    
-    bot1.wait();
-    bot2.wait();
-    return 0;
+}
+
+//Getter functions
+std::array<std::array<char, GRID_SIZE>, GRID_SIZE> Engine::getGrid() const{
+    return grid;
+}
+
+int Engine::getTotalCrystals(){
+    return totalCrystals;
 }
