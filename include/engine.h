@@ -51,13 +51,11 @@ private:
 
     //Take the input string and retrieve the details of the move.
     //Returns true if the input format is valid, false otherwise.
-    
-    
-public:
-    Engine(unsigned seed = static_cast<unsigned>(std::time(nullptr)));
-
     bool parseMove(const std::string_view input, std::string& move,
     int& bombX, int& bombY, int& attackX, int& attackY) const;
+    
+public:
+    Engine(unsigned seed = static_cast<unsigned>(std::time(nullptr)));    
 
     void initialiseGrid();
     void printGrid() const;
