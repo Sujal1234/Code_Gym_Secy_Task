@@ -7,13 +7,16 @@
 #include <array>
 #include <random>
 #include <ctime>
+#include <vector>
+#include <utility>
 
 constexpr int GRID_SIZE = 20;
 constexpr int MAX_TURNS = 250;
 constexpr int INITIAL_HP = 5;
-constexpr int BOMB_RANGE = 3;
+constexpr int BOMB_RANGE = 3; //Including placed cell
 constexpr int ATTACK_RANGE = 3;
-constexpr int COOLDOWN_PERIOD = 4;
+constexpr int BOMB_COOLDOWN = 4;
+constexpr int ATTACK_COOLDOWN = 4;
 constexpr int MIN_CRYSTALS = 10;
 
 class Engine{
@@ -57,13 +60,15 @@ private:
     //Move the player in the specified direction.
     //Returns true if the move was successful, false otherwise.
     bool movePlayer(int player, std::string_view move);
+
+    std::vector<std::pair<int, int>> getExplosionArea(int x, int y) const;
     
 public:
-    Engine(unsigned seed = static_cast<unsigned>(std::time(nullptr)));    
-
+    Engine(unsigned seed = static_cast<unsigned>(std::time(nullptr)));
+    
     void initialiseGrid();
     void printGrid() const;
-
+    
     //Getter functions
     std::array<std::array<char, GRID_SIZE>, GRID_SIZE> getGrid() const;
     int getTotalCrystals() const;

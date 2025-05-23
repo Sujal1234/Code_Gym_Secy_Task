@@ -157,6 +157,29 @@ bool Engine::movePlayer(int player, std::string_view move) {
     return true;
 }
 
+std::vector<std::pair<int, int>> Engine::getExplosionArea(int x, int y) const{
+    std::vector<std::pair<int, int>> explosionArea;
+    explosionArea.emplace_back(x, y); //Add the cell where the bomb is placed
+
+    int dx[4] = {1, -1, 0, 0};
+    int dy[4] = {0, 0, 1, -1};
+
+    for (int dir = 0; dir < 4; dir++)
+    {
+        for (int dist = 1; dist <= BOMB_RANGE-1; dist++)
+        {
+            int newX = x + dx[dir] * dist;
+            int newY = y + dy[dir] * dist;
+
+            if (!isValidPosition(newX, newY) || isObstacleCell(newX, newY)) {
+                break; //Stop if out of bounds or obstacle in this direction
+            }
+            explosionArea.emplace_back(newX, newY);
+        }   
+    }
+    return explosionArea;
+}
+
 void Engine::printGrid() const {
     for (int y = 0; y < GRID_SIZE; y++)
     {
