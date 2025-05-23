@@ -54,6 +54,10 @@ private:
     bool parseMove(const std::string_view input, std::string& move,
     int& bombX, int& bombY, int& attackX, int& attackY) const;
     
+    //Move the player in the specified direction.
+    //Returns true if the move was successful, false otherwise.
+    bool movePlayer(int player, std::string_view move);
+    
 public:
     Engine(unsigned seed = static_cast<unsigned>(std::time(nullptr)));    
 

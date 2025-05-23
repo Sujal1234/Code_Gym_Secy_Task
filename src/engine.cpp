@@ -135,6 +135,28 @@ bool Engine::parseMove(const std::string_view input, std::string& move,
         return true;
 }
 
+//Move the player in the specified direction
+//Returns true if the move is valid, false otherwise.
+bool Engine::movePlayer(int player, std::string_view move) {
+    //Player 1 is 0, Player 2 is 1
+    int& playerX = (player == 0) ? player1X : player2X;
+    int& playerY = (player == 0) ? player1Y : player2Y;
+
+    int newX = playerX, newY = playerY;
+
+    if (move == "UP") newY--;
+    else if (move == "DOWN") newY++;
+    else if (move == "LEFT") newX--;
+    else if (move == "RIGHT") newX++;
+
+    if (!isValidPosition(newX, newY) || !isEmptyCell(newX, newY)) {
+        return false; // Invalid move
+    }
+    playerX = newX;
+    playerY = newY;
+    return true;
+}
+
 void Engine::printGrid() const {
     for (int y = 0; y < GRID_SIZE; y++)
     {
