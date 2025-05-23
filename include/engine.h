@@ -89,6 +89,10 @@ public:
     void printGrid() const;
     void printEndReason() const;
     void processTurn(std::string_view player1Input, std::string_view player2Input);
+
+    //Use when the input received from (a) player(s) is invalid.
+    //Accordingly set the game state and end reason.
+    void inputReadError(bool player1Error, bool player2Error);
     
     //Getter functions
     std::array<std::array<char, GRID_SIZE>, GRID_SIZE> getGrid() const;
@@ -98,5 +102,8 @@ public:
     int getAttackCooldown(int player) const;
     int getBombCooldown(int player) const;
     int getCrystals(int player) const;
+    std::string getLastMove(int player) const;
+
+    std::string getGameState(int player) const;
 };
 #endif //engine_h

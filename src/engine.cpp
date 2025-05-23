@@ -41,7 +41,7 @@ void Engine::initialiseGrid(){
         grid[i].fill('.');
     }
 
-    std::uniform_real_distribution<float> disMult(0, 0.1);
+    std::uniform_real_distribution<float> disMult(0, 0.1f);
     float obstacleMultiplier = disMult(rng);
 
     //Randomly place obstacles in 0% - 10% of the grid
@@ -254,9 +254,6 @@ void Engine::processTurn(std::string_view player1Input, std::string_view player2
          }
     }
 
-    int player1OldX {player1X}, player1OldY {player1Y};
-    int player2OldX {player2X}, player2OldY {player2Y};
-
     if(!player1Lost && !movePlayer(0, player1Move.dir)){
         player1Lost = true;
     }
@@ -337,6 +334,7 @@ void Engine::processTurn(std::string_view player1Input, std::string_view player2
 }
 
 //To be used when both players have provided correct input and already moved
+//gameOver must not be set to true before checking this
 bool Engine::checkGameOver(){
     if(gameOver) return true;
 
@@ -438,13 +436,33 @@ bool Engine::checkGameOver(){
                 player2Lost = true;
                 endReason = std::string("Tie: ") +
                             std::to_string(MAX_TURNS) +
-                            std::string(" moves have been played and both players have the same HP");
+                            std::string(" moves have been played and both players have the same crystals and HP");
             }
         }
         return true;
     }
 
     return false; //Game is still ongoing
+}
+
+//Used if there is an error while reading input from the players
+//This is not for invalid input but rather errors in the input reading process itself
+void Engine::inputReadError(bool player1Error, bool player2Error){
+    assert(player1Error || player2Error);
+
+    if(player1Error) player1Lost = true;
+    if(player2Error) player2Lost = true;
+    gameOver = true;
+
+    if(player1Error && player2Error){
+        endReason = "Tie: Error encountered while reading input from both players";
+    }
+    else if(player1Error){
+        endReason = "Player 2 wins as error encountered while reading input from Player 1";
+    }
+    else{
+        endReason = "Player 1 wins as error encountered while reading input from Player 2";
+    }
 }
 
 void Engine::collectCrystals(int player,
@@ -535,4 +553,31 @@ int Engine::getCrystals(int player) const{
     else{
         return player2Crystals;
     }
+}
+
+std::string Engine::getLastMove(int player) const{
+    if(player == 0){
+        return player1LastMove;
+    }
+    else{
+        return player2LastMove;
+    }
+}
+
+//Provides the appropriate game state string to be sent to `player`
+std::string Engine::getGameState(int player) const{
+    std::stringstream ss;
+
+    //Format: x y bombCooldown attackCooldown yourCrystals enemyCrystals yourHP enemyHP
+    if(player == 0){
+        ss << player1X << " " << player1Y << " " << player1BombCooldown << " "
+        << player1AttackCooldown << " " << player1Crystals << " " 
+        << player2Crystals << " " << player1HP << " " << player2HP;
+    }
+    else{
+        ss << player2X << " " << player2Y << " " << player2BombCooldown << " "
+        << player2AttackCooldown << " " << player2Crystals << " "
+        << player1Crystals << " " << player2HP << " " << player1HP;
+    }
+    return ss.str();
 }

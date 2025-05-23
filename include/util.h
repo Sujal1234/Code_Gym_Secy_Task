@@ -11,8 +11,7 @@
 namespace bp = boost::process;
 namespace asio = boost::asio;
 
-inline constexpr int responseTimeLimit = 1; 
-
+inline constexpr int responseTimeLimit = 1; //seconds
 void buildCpp(std::string code_path, std::string out_name);
 std::optional<std::string> readPipeDeadline(bp::async_pipe &readPipe, asio::io_context &ctx,
                       boost::posix_time::seconds deadline);
