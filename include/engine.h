@@ -69,6 +69,7 @@ private:
     
     //Move the player in the specified direction.
     //Returns true if the move was successful, false otherwise.
+    void initialiseGrid();
     bool movePlayer(int player, std::string_view move);
     void getExplosionArea(int x, int y, std::set<std::pair<int, int>>& explosionArea) const;
     bool parseMove(const std::string_view input, PlayerMove& move) const;
@@ -85,7 +86,6 @@ private:
 public:
     Engine(unsigned seed = static_cast<unsigned>(std::time(nullptr)));
     
-    void initialiseGrid();
     void printGrid() const;
     void printEndReason() const;
     void processTurn(std::string_view player1Input, std::string_view player2Input);
