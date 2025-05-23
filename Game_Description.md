@@ -52,7 +52,7 @@ One of the following situations may arise:
 
 
 ## Game Input
-* If it is the first line then skip this point and move to the rest.  
+* If it is the first turn then skip this point and move to the rest.  
 If it is not the first turn, then the first line will be your opponent's movement. It will be in the format `MOVE <direction>` (E.g `MOVE UP`).   
 * The next line contains $8$ space separated integers in the format `x y bombCooldown attackCooldown yourCrystals enemyCrystals yourHP enemyHP`  
 where,  
