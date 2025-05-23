@@ -88,30 +88,29 @@ void Engine::initialiseGrid(){
 }
 
 //Returns true if the input format is valid, false otherwise.
-bool Engine::parseMove(const std::string_view input, std::string& move, 
-    int& bombX, int& bombY, int& attackX, int& attackY) const {
+bool Engine::parseMove(const std::string_view input, PlayerMove& move) const {
         std::stringstream ss(input.data());
 
         std::string moveStr, attackStr, bombStr;
-
+        
         if(!(ss >> moveStr) || moveStr !=  "MOVE"){
             return false;
         }
 
-        if(!(ss >> move) || 
-        (move != "UP" && move != "DOWN" &&
-         move != "LEFT" && move != "RIGHT")){
+        if(!(ss >> move.dir) || 
+        (move.dir != "UP" && move.dir != "DOWN" &&
+         move.dir != "LEFT" && move.dir != "RIGHT")){
             return false;
         }
 
         if(!(ss >> bombStr) || bombStr != "BOMB"){
             return false;
         }
-        if(!(ss >> bombX) || !(ss >> bombY)){
+        if(!(ss >> move.bombX) || !(ss >> move.bombY)){
             return false;
         }
-        if(!isValidPosition(bombX, bombY)){
-            if(!(bombX == -1 && bombY == -1)){ //Bomb not used
+        if(!isValidPosition(move.bombX, move.bombY)){
+            if(!(move.bombX == -1 && move.bombY == -1)){ //Bomb not used
                 return false;
             }
         }
@@ -119,11 +118,11 @@ bool Engine::parseMove(const std::string_view input, std::string& move,
         if(!(ss >> attackStr) || attackStr != "ATTACK"){
             return false;
         }
-        if(!(ss >> attackX) || !(ss >> attackY)){
+        if(!(ss >> move.attackX) || !(ss >> move.attackY)){
             return false;
         }
-        if(!isValidPosition(attackX, attackY)){
-            if(!(attackX == -1 && attackY == -1)){ //Attack not used
+        if(!isValidPosition(move.attackX, move.attackY)){
+            if(!(move.attackX == -1 && move.attackY == -1)){ //Attack not used
                 return false;
             }
         }
@@ -180,6 +179,10 @@ std::vector<std::pair<int, int>> Engine::getExplosionArea(int x, int y) const{
     return explosionArea;
 }
 
+void Engine::processTurn(std::string_view player1Input, std::string_view player2Input){
+   //TODO 
+}
+
 void Engine::printGrid() const {
     for (int y = 0; y < GRID_SIZE; y++)
     {
@@ -205,6 +208,6 @@ int Engine::getTotalCrystals() const{
     return totalCrystals;
 }
 
-bool Engine::gameOver() const{
+bool Engine::isGameOver() const{
     return gameOver;
 }

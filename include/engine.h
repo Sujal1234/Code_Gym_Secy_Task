@@ -19,6 +19,16 @@ constexpr int BOMB_COOLDOWN = 4;
 constexpr int ATTACK_COOLDOWN = 4;
 constexpr int MIN_CRYSTALS = 10;
 
+struct PlayerMove{
+    std::string dir {};
+    int bombX {}, bombY {};
+    int attackX {}, attackY {};
+
+    PlayerMove() = default;
+    PlayerMove(std::string d, int bX, int bY, int aX, int aY)
+        : dir(d), bombX(bX), bombY(bY), attackX(aX), attackY(aY) {}
+};
+
 class Engine{
 private:
     // Game state
@@ -54,17 +64,17 @@ private:
 
     //Take the input string and retrieve the details of the move.
     //Returns true if the input format is valid, false otherwise.
-    bool parseMove(const std::string_view input, std::string& move,
-    int& bombX, int& bombY, int& attackX, int& attackY) const;
+    // bool parseMove(const std::string_view input, PlayerMove& move) const;
     
     //Move the player in the specified direction.
     //Returns true if the move was successful, false otherwise.
     bool movePlayer(int player, std::string_view move);
-
     std::vector<std::pair<int, int>> getExplosionArea(int x, int y) const;
+    void processTurn(std::string_view player1Input, std::string_view player2Input);
     
 public:
     Engine(unsigned seed = static_cast<unsigned>(std::time(nullptr)));
+    bool parseMove(const std::string_view input, PlayerMove& move) const;
     
     void initialiseGrid();
     void printGrid() const;
@@ -72,6 +82,6 @@ public:
     //Getter functions
     std::array<std::array<char, GRID_SIZE>, GRID_SIZE> getGrid() const;
     int getTotalCrystals() const;
-    bool gameOver() const;
+    bool isGameOver() const;
 };
 #endif //engine_h
