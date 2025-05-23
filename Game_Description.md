@@ -52,7 +52,8 @@ One of the following situations may arise:
 
 
 ## Game Input
-* The first line will be your opponent's movement. It will be in the format `MOVE <direction>` (E.g `MOVE UP`).   
+* If it is the first line then skip this point and move to the rest.  
+If it is not the first turn, then the first line will be your opponent's movement. It will be in the format `MOVE <direction>` (E.g `MOVE UP`).   
 * The next line contains $8$ space separated integers in the format `x y bombCooldown attackCooldown yourCrystals enemyCrystals yourHP enemyHP`  
 where,  
 `x`, `y` are your coordinates. The top left corner is $(0, 0)$, the $x$ coordinate increases from left to right and $y$ coordinate increases from top to bottom.  
