@@ -204,3 +204,7 @@ std::array<std::array<char, GRID_SIZE>, GRID_SIZE> Engine::getGrid() const{
 int Engine::getTotalCrystals() const{
     return totalCrystals;
 }
+
+bool Engine::gameOver() const{
+    return gameOver;
+}

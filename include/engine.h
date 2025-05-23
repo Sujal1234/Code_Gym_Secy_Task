@@ -72,5 +72,6 @@ public:
     //Getter functions
     std::array<std::array<char, GRID_SIZE>, GRID_SIZE> getGrid() const;
     int getTotalCrystals() const;
+    bool gameOver() const;
 };
 #endif //engine_h
