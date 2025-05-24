@@ -56,11 +56,13 @@ int main(int argc, char* argv[]){
     }
 
     engine.printGrid(); //For debugging
+    std::cout << "--------------------------------------------" << std::endl;
 
     handleTurn(engine, bot1, bot2, bot1_out, bot2_out);
     
     while(bot1.running() && bot2.running()){
         engine.printGrid(); //For debugging
+        std::cout << "--------------------------------------------" << std::endl;
 
         //Send the last move made by the opponent
         bot1_in << "MOVE " << engine.getLastMove(1) << std::endl;
