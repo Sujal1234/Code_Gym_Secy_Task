@@ -7,9 +7,37 @@
 #include <array>
 #include <utility>
 #include <set>
+#include <fstream>
 #include <cassert>
 
+Engine::Engine()
+: logsFilePath {"logs.json"}
+{
+    rng.seed(
+        static_cast<unsigned>(std::time(nullptr))
+    );
+    initialiseGrid();
+}
+
 Engine::Engine(unsigned seed)
+: logsFilePath {"logs.json"}
+{
+    rng.seed(seed);
+    initialiseGrid();
+}
+
+Engine::Engine(std::string path)
+: logsFilePath {path}
+{
+    rng.seed(
+        static_cast<unsigned>(std::time(nullptr))
+    );
+    initialiseGrid();
+}
+
+Engine::Engine(std::string path,
+       unsigned seed)
+       : logsFilePath {path}
 {
     rng.seed(seed);
     initialiseGrid();

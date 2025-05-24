@@ -1,6 +1,8 @@
 #ifndef engine_h
 #define engine_h
 
+#include "../include/nlohmann_json.hpp"
+
 #include <iostream>
 #include <string>
 #include <string_view>
@@ -10,6 +12,9 @@
 #include <vector>
 #include <utility>
 #include <set>
+#include <fstream>
+
+using json = nlohmann::json;
 
 constexpr int GRID_SIZE = 20;
 constexpr int MAX_TURNS = 100;
@@ -54,6 +59,10 @@ private:
 
     std::string endReason;
 
+    json logs; //Json object to store logs
+    std::string logsFilePath; //Path of the file where logs will be written
+
+
     // Helper functions
     bool isValidPosition(int x, int y) const;
     bool isEmptyCell(int x, int y) const;
@@ -79,12 +88,24 @@ private:
     //Returns true if game is over, false otherwise.
     bool checkGameOver();
 
+    //Adds log of this turn to logs json object.
+    void logTurn();
+
+    //Writes the logs to the appropriate logs file.
+    void flushLogs();
+
     void collectCrystals(int player,
     std::set<std::pair<int, int>>& explosionArea,
     std::set<std::pair<int, int>>& explosionArea2);
     
 public:
-    Engine(unsigned seed = static_cast<unsigned>(std::time(nullptr)));
+    //`path` is the path to the file where logs (json) will be written
+    //Default value of `path` is "logs.json"
+    //Default value of `seed` is static_cast<unsigned>(std::time(nullptr)) (For random seed)
+    Engine();
+    Engine(unsigned seed);
+    Engine(std::string path);
+    Engine(std::string path, unsigned seed);
     
     void printGrid() const;
     void printEndReason() const;
