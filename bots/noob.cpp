@@ -32,24 +32,6 @@ int main(){
     std::uniform_int_distribution<std::size_t> dis(0, 3);
 
     std::size_t ind = dis(gen);
-    int newX {x}, newY {y};
-    switch(ind){
-        case 0: newY--; break; //UP
-        case 1: newY++; break; //DOWN
-        case 2: newX--; break; //LEFT
-        case 3: newX++; break; //RIGHT
-    }
-    while(!isValidPosition(newX, newY) || grid[newY][newX] != '.'){
-        ind = dis(gen);
-        newX = x;
-        newY = y;
-        switch(ind){
-            case 0: newY--; break; //UP
-            case 1: newY++; break; //DOWN
-            case 2: newX--; break; //LEFT
-            case 3: newX++; break; //RIGHT
-        }
-    }
 
     std::cerr << "NOOB: " << "MOVE " << dirs[ind] << " BOMB -1 -1 ATTACK -1 -1" << std::endl;
     std::cout << "MOVE " << dirs[ind] << " BOMB -1 -1 ATTACK -1 -1" << std::endl;
@@ -71,25 +53,6 @@ int main(){
         }
         
         ind = dis(gen);
-        newX = x;
-        newY = y;
-        switch(ind){
-            case 0: newY--; break; //UP
-            case 1: newY++; break; //DOWN
-            case 2: newX--; break; //LEFT
-            case 3: newX++; break; //RIGHT
-        }
-        while(!isValidPosition(newX, newY) || grid[newY][newX] != '.'){
-            ind = dis(gen);
-            newX = x;
-            newY = y;
-            switch(ind){
-                case 0: newY--; break; //UP
-                case 1: newY++; break; //DOWN
-                case 2: newX--; break; //LEFT
-                case 3: newX++; break; //RIGHT
-            }
-        }
         
         std::cerr << "NOOB: " << "MOVE " << dirs[ind] << " BOMB -1 -1 ATTACK -1 -1" << std::endl;
         std::cout << "MOVE " << dirs[ind] << " BOMB -1 -1 ATTACK -1 -1" << std::endl;

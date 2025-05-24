@@ -209,128 +209,153 @@ void Engine::getExplosionArea(int x, int y, std::set<std::pair<int, int>>& explo
     }
 }
 
-void Engine::processTurn(std::string_view player1Input, std::string_view player2Input){
-   PlayerMove player1Move, player2Move;
+void Engine::processTurn(std::string_view player1Input, std::string_view player2Input)
+{
+    PlayerMove player1Move, player2Move;
 
-   if(!parseMove(player1Input, player1Move)){
-       player1Lost = true;
-       player1MoveError = true;
-   }
-   if(!parseMove(player2Input, player2Move)){
-       player2Lost = true;
-       player2MoveError = true;
-   }
-
-   bool player1Bombed {true}, player2Bombed {true};
-   if(!player1Lost && player1Move.bombX == -1 && player1Move.bombY == -1){
-       player1Bombed = false;
-   }
-   if(!player2Lost && player2Move.bombX == -1 && player2Move.bombY == -1){
-       player2Bombed = false;
-   }
-
-   
-    if(!player1Lost && player1Bombed){
-        //Check if BOMB is placed on a non-empty cell
-         if(!isEmptyCell(player1Move.bombX, player1Move.bombY)){
-              player1Lost = true;
-         }
-         //Check if BOMB is before cooldown is over
-         if(player1BombCooldown > 0){
-              player1Lost = true;
-         }
-    }
-    if(!player2Lost && player2Bombed){
-         if(!isEmptyCell(player2Move.bombX, player2Move.bombY)){
-              player2Lost = true;
-         }
-         if(player2BombCooldown > 0){
-              player2Lost = true;
-         }
-    }
-
-   //Check if BOMB is placed within range
-   if(!player1Lost && (player1Move.bombX != -1 && player1Move.bombY != -1)){
-       if(manhattanDistance(player1X, player1Y,
-         player1Move.bombX, player1Move.bombY) > BOMB_RANGE){
-           player1Lost = true;
-       }
-   }
-   if(!player2Lost && (player2Move.bombX != -1 && player2Move.bombY != -1)){
-       if(manhattanDistance(player2X, player2Y,
-         player2Move.bombX, player2Move.bombY) > BOMB_RANGE){
-           player2Lost = true;
-       }
-   }
-
-   bool player1Attacked {true}, player2Attacked {true};
-   if(!player1Lost && player1Move.attackX == -1 && player1Move.attackY == -1){
-       player1Attacked = false;
-   }
-   if(!player2Lost && player2Move.attackX == -1 && player2Move.attackY == -1){
-       player2Attacked = false;
-   }
-
-   //Check if ATTACK is placed within range
-   if(!player1Lost && player1Attacked){
-       if(manhattanDistance(player1X, player1Y,
-         player1Move.attackX, player1Move.attackY) > ATTACK_RANGE){
-           player1Lost = true;
-       }
-   }
-    if(!player2Lost && player2Attacked){
-         if(manhattanDistance(player2X, player2Y,
-            player2Move.attackX, player2Move.attackY) > ATTACK_RANGE){
-              player2Lost = true;
-         }
-    }
-
-    if(!player1Lost && !movePlayer(0, player1Move.dir)){
+    if (!parseMove(player1Input, player1Move))
+    {
         player1Lost = true;
     }
-    if(!player2Lost && !movePlayer(1, player2Move.dir)){
+    if (!parseMove(player2Input, player2Move))
+    {
         player2Lost = true;
     }
 
-    //All moves have been verified for validity
-    if(player1Lost || player2Lost){
+    bool player1Bombed{true}, player2Bombed{true};
+    if (!player1Lost && player1Move.bombX == -1 && player1Move.bombY == -1)
+    {
+        player1Bombed = false;
+    }
+    if (!player2Lost && player2Move.bombX == -1 && player2Move.bombY == -1)
+    {
+        player2Bombed = false;
+    }
+
+    if (!player1Lost && player1Bombed)
+    {
+        // Check if BOMB is placed on a non-empty cell
+        if (!isEmptyCell(player1Move.bombX, player1Move.bombY))
+        {
+            player1Lost = true;
+        }
+        // Check if BOMB is before cooldown is over
+        if (player1BombCooldown > 0)
+        {
+            player1Lost = true;
+        }
+    }
+    if (!player2Lost && player2Bombed)
+    {
+        if (!isEmptyCell(player2Move.bombX, player2Move.bombY))
+        {
+            player2Lost = true;
+        }
+        if (player2BombCooldown > 0)
+        {
+            player2Lost = true;
+        }
+    }
+
+    // Check if BOMB is placed within range
+    if (!player1Lost && (player1Move.bombX != -1 && player1Move.bombY != -1))
+    {
+        if (manhattanDistance(player1X, player1Y,
+                              player1Move.bombX, player1Move.bombY) > BOMB_RANGE)
+        {
+            player1Lost = true;
+        }
+    }
+    if (!player2Lost && (player2Move.bombX != -1 && player2Move.bombY != -1))
+    {
+        if (manhattanDistance(player2X, player2Y,
+                              player2Move.bombX, player2Move.bombY) > BOMB_RANGE)
+        {
+            player2Lost = true;
+        }
+    }
+
+    bool player1Attacked{true}, player2Attacked{true};
+    if (!player1Lost && player1Move.attackX == -1 && player1Move.attackY == -1)
+    {
+        player1Attacked = false;
+    }
+    if (!player2Lost && player2Move.attackX == -1 && player2Move.attackY == -1)
+    {
+        player2Attacked = false;
+    }
+
+    // Check if ATTACK is placed within range
+    if (!player1Lost && player1Attacked)
+    {
+        if (manhattanDistance(player1X, player1Y,
+                              player1Move.attackX, player1Move.attackY) > ATTACK_RANGE)
+        {
+            player1Lost = true;
+        }
+    }
+    if (!player2Lost && player2Attacked)
+    {
+        if (manhattanDistance(player2X, player2Y,
+                              player2Move.attackX, player2Move.attackY) > ATTACK_RANGE)
+        {
+            player2Lost = true;
+        }
+    }
+
+    if (!player1Lost && !movePlayer(0, player1Move.dir))
+    {
+        player1Lost = true;
+    }
+    if (!player2Lost && !movePlayer(1, player2Move.dir))
+    {
+        player2Lost = true;
+    }
+
+    // All moves have been verified for validity
+    if (player1Lost || player2Lost)
+    {
         gameOver = true;
-        if(player1Lost && player2Lost){
+        if (player1Lost && player2Lost)
+        {
             endReason = "Tie: Both players sent an invalid move";
         }
-        else if(player1Lost){
+        else if (player1Lost)
+        {
             endReason = "Player 2 wins as Player 1 sent an invalid move";
         }
-        else{
+        else
+        {
             endReason = "Player 1 wins as Player 2 sent an invalid move";
         }
+        currentTurn++;
+        logTurn(player1Move, player2Move);
+        writeLogs();
         return;
     }
 
-    //Both players have made valid moves and moved successfully
+    // Both players have made valid moves and moved successfully
 
-    //Store the last moves so it can be sent in the next turn
+    // Store the last moves so it can be sent in the next turn
     player1LastMove = player1Move.dir;
     player2LastMove = player2Move.dir;
 
-    //Update cooldowns
-    player1AttackCooldown = (player1Attacked) ? ATTACK_COOLDOWN :
-                            std::max(0, player1AttackCooldown - 1);
-    player2AttackCooldown = (player2Attacked) ? ATTACK_COOLDOWN :
-                            std::max(0, player2AttackCooldown - 1);
-    player1BombCooldown = (player1Bombed) ? BOMB_COOLDOWN :
-                          std::max(0, player1BombCooldown - 1);
-    player2BombCooldown = (player2Bombed) ? BOMB_COOLDOWN :
-                          std::max(0, player2BombCooldown - 1);
+    // Update cooldowns
+    player1AttackCooldown = (player1Attacked) ? ATTACK_COOLDOWN : std::max(0, player1AttackCooldown - 1);
+    player2AttackCooldown = (player2Attacked) ? ATTACK_COOLDOWN : std::max(0, player2AttackCooldown - 1);
+    player1BombCooldown = (player1Bombed) ? BOMB_COOLDOWN : std::max(0, player1BombCooldown - 1);
+    player2BombCooldown = (player2Bombed) ? BOMB_COOLDOWN : std::max(0, player2BombCooldown - 1);
 
-    //Calculate cells affected by the bombs of both players
+    // Calculate cells affected by the bombs of both players
     std::set<std::pair<int, int>> explosionArea1;
     std::set<std::pair<int, int>> explosionArea2;
 
-    if(player1Bombed){
+    if (player1Bombed)
+    {
         getExplosionArea(player1Move.bombX, player1Move.bombY, explosionArea1);
     }
-    if(player2Bombed){
+    if (player2Bombed)
+    {
         getExplosionArea(player2Move.bombX, player2Move.bombY, explosionArea2);
     }
 
@@ -340,26 +365,31 @@ void Engine::processTurn(std::string_view player1Input, std::string_view player2
     std::set<std::pair<int, int>> attackArea1;
     std::set<std::pair<int, int>> attackArea2;
 
-    if(player1Attacked){
-        //Attack area is the same as explosion area
+    if (player1Attacked)
+    {
+        // Attack area is the same as explosion area
         getExplosionArea(player1Move.attackX, player1Move.attackY, attackArea1);
     }
-    if(player2Attacked){
-        //Attack area is the same as explosion area
+    if (player2Attacked)
+    {
+        // Attack area is the same as explosion area
         getExplosionArea(player2Move.attackX, player2Move.attackY, attackArea2);
     }
 
-    if(attackArea1.count({player2X, player2Y})){
+    if (attackArea1.count({player2X, player2Y}))
+    {
         player2HP--;
     }
-    if(attackArea2.count({player1X, player1Y})){
+    if (attackArea2.count({player1X, player1Y}))
+    {
         player1HP--;
     }
 
-    //Crystals have been collected and players have attacked
-    //Now we need to check if game is over
+    // Crystals have been collected and players have attacked
+    // Now we need to check if game is over
     currentTurn++;
-    if(checkGameOver()){
+    if (checkGameOver())
+    {
         logTurn(player1Move, player2Move);
         writeLogs();
         return;
@@ -619,18 +649,34 @@ void Engine::logTurn(PlayerMove& player1Move, PlayerMove& player2Move)
             {"ATTACK", std::make_pair(player2Move.attackX, player2Move.attackY)}
         };
     }
-    //Check if game over to add the end reason and player winners
+    //Add other details of the turn
+    turn["Player 1"]["Position"] = std::make_pair(player1X, player1Y);
+    turn["Player 2"]["Position"] = std::make_pair(player2X, player2Y);
+
+    turn["Player 1"]["HP"] = player1HP;
+    turn["Player 2"]["HP"] = player2HP;
+
+    turn["Player 1"]["Crystals"] = player1Crystals;
+    turn["Player 2"]["Crystals"] = player2Crystals;
+
+    turn["Player 1"]["Attack cooldown"] = player1AttackCooldown;
+    turn["Player 2"]["Attack cooldown"] = player2AttackCooldown;
+
+    turn["Player 1"]["Bomb cooldown"] = player1BombCooldown;
+    turn["Player 2"]["Bomb cooldown"] = player2BombCooldown;
+
+    //Check if game over to add the end reason and winner
     if(gameOver){
         turn["Game status"] = "Game Over";
         turn["End reason"] = endReason;
         if(player1Lost && player2Lost){
-            turn["Winners"] = "None (Tie)";
+            turn["Winner"] = "None (Tie)";
         }
         else if(player1Lost){
-            turn["Winners"] = "Player 2";
+            turn["Winner"] = "Player 2";
         }
         else{
-            turn["Winners"] = "Player 1";
+            turn["Winner"] = "Player 1";
         }
     }
     else{

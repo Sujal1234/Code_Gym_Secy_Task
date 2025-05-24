@@ -19,10 +19,10 @@ void handleTurn(Engine& engine, bp::child& bot1, bp::child& bot2,
     bp::async_pipe& bot1_out, bp::async_pipe& bot2_out);
 
 int main(int argc, char* argv[]){
-    //Usage: ./engine bot1.cpp bot2.cpp
+    //Usage: ./engine bot1.cpp bot2.cpp logs_file.json(optional)
 
-    if(argc != 3){
-        std::cerr << "Usage: ./engine path_to_bot1.cpp path_to_bot2.cpp\n";
+    if(argc != 3 && argc != 4){
+        std::cerr << "Usage: ./engine path_to_bot1.cpp path_to_bot2.cpp logs_file.json(optional) \n";
         std::exit(1);
     }
 
@@ -39,7 +39,7 @@ int main(int argc, char* argv[]){
     bp::child bot1("bin/bot1", bp::std_out > bot1_out, bp::std_in < bot1_in, ctx1);
     bp::child bot2("bin/bot2", bp::std_out > bot2_out, bp::std_in < bot2_in, ctx2);
 
-    Engine engine(0);
+    Engine engine = (argc == 4) ? Engine(argv[3]) : Engine(); //Fixed seed for debugging
 
     //First turn - send just the game state and grid to both bots    
     bot1_in << engine.getGameState(0) << std::endl;

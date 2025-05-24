@@ -49,8 +49,6 @@ private:
 
     bool player1OutputReadError {false};
     bool player2OutputReadError {false};
-    bool player1MoveError {false};
-    bool player2MoveError {false};
 
     int totalCrystals;
     int currentTurn {};
@@ -65,7 +63,7 @@ private:
     std::string endReason;
 
     json logs; //Json object to store logs
-    std::string logsFilePath; //Path of the file where logs will be written
+    std::string logsFilePath {"logs.json"}; //Path of the file where logs will be written
 
 
     // Helper functions
