@@ -1,0 +1,620 @@
+{
+    "Turn 1": {
+        "Game status": "Ongoing",
+        "Player 1": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "RIGHT",
+            "Position": [
+                5,
+                9
+            ]
+        },
+        "Player 2": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "DOWN",
+            "Position": [
+                13,
+                14
+            ]
+        }
+    },
+    "Turn 10": {
+        "Game status": "Ongoing",
+        "Player 1": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "DOWN",
+            "Position": [
+                5,
+                6
+            ]
+        },
+        "Player 2": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "DOWN",
+            "Position": [
+                14,
+                16
+            ]
+        }
+    },
+    "Turn 11": {
+        "Game status": "Ongoing",
+        "Player 1": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "UP",
+            "Position": [
+                5,
+                5
+            ]
+        },
+        "Player 2": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "DOWN",
+            "Position": [
+                14,
+                17
+            ]
+        }
+    },
+    "Turn 12": {
+        "Game status": "Ongoing",
+        "Player 1": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "DOWN",
+            "Position": [
+                5,
+                6
+            ]
+        },
+        "Player 2": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "UP",
+            "Position": [
+                14,
+                16
+            ]
+        }
+    },
+    "Turn 13": {
+        "Game status": "Ongoing",
+        "Player 1": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "DOWN",
+            "Position": [
+                5,
+                7
+            ]
+        },
+        "Player 2": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "UP",
+            "Position": [
+                14,
+                15
+            ]
+        }
+    },
+    "Turn 14": {
+        "Game status": "Ongoing",
+        "Player 1": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "LEFT",
+            "Position": [
+                4,
+                7
+            ]
+        },
+        "Player 2": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "LEFT",
+            "Position": [
+                13,
+                15
+            ]
+        }
+    },
+    "Turn 15": {
+        "End reason": "Player 1 wins as Player 2 sent an invalid move",
+        "Game status": "Game Over",
+        "Player 1": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "DOWN",
+            "Position": [
+                4,
+                8
+            ]
+        },
+        "Player 2": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "LEFT",
+            "Position": [
+                13,
+                15
+            ]
+        },
+        "Winner": "Player 1"
+    },
+    "Turn 2": {
+        "Game status": "Ongoing",
+        "Player 1": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "LEFT",
+            "Position": [
+                4,
+                9
+            ]
+        },
+        "Player 2": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "UP",
+            "Position": [
+                13,
+                13
+            ]
+        }
+    },
+    "Turn 3": {
+        "Game status": "Ongoing",
+        "Player 1": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "RIGHT",
+            "Position": [
+                5,
+                9
+            ]
+        },
+        "Player 2": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "UP",
+            "Position": [
+                13,
+                12
+            ]
+        }
+    },
+    "Turn 4": {
+        "Game status": "Ongoing",
+        "Player 1": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "UP",
+            "Position": [
+                5,
+                8
+            ]
+        },
+        "Player 2": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "RIGHT",
+            "Position": [
+                14,
+                12
+            ]
+        }
+    },
+    "Turn 5": {
+        "Game status": "Ongoing",
+        "Player 1": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "UP",
+            "Position": [
+                5,
+                7
+            ]
+        },
+        "Player 2": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "LEFT",
+            "Position": [
+                13,
+                12
+            ]
+        }
+    },
+    "Turn 6": {
+        "Game status": "Ongoing",
+        "Player 1": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "DOWN",
+            "Position": [
+                5,
+                8
+            ]
+        },
+        "Player 2": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "RIGHT",
+            "Position": [
+                14,
+                12
+            ]
+        }
+    },
+    "Turn 7": {
+        "Game status": "Ongoing",
+        "Player 1": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "UP",
+            "Position": [
+                5,
+                7
+            ]
+        },
+        "Player 2": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "DOWN",
+            "Position": [
+                14,
+                13
+            ]
+        }
+    },
+    "Turn 8": {
+        "Game status": "Ongoing",
+        "Player 1": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "UP",
+            "Position": [
+                5,
+                6
+            ]
+        },
+        "Player 2": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "DOWN",
+            "Position": [
+                14,
+                14
+            ]
+        }
+    },
+    "Turn 9": {
+        "Game status": "Ongoing",
+        "Player 1": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "UP",
+            "Position": [
+                5,
+                5
+            ]
+        },
+        "Player 2": {
+            "ATTACK": [
+                -1,
+                -1
+            ],
+            "Attack cooldown": 0,
+            "BOMB": [
+                -1,
+                -1
+            ],
+            "Bomb cooldown": 0,
+            "Crystals": 0,
+            "HP": 5,
+            "MOVE": "DOWN",
+            "Position": [
+                14,
+                15
+            ]
+        }
+    },
+    "grid": "....##......C...#...\n.....C..#C..........\n...C.#..............\n#.##....#...#.......\n.......C...#........\n...........C.#......\n........C...........\n.......#....#C....C.\n......#.........#.#.\n.....1....C.........\n....#...........#.#.\n.......#............\n.#.##.......#.......\n...C....C...#.......\n.............2...#..\n#...#.......#.......\n............C.......\n...........#....C.#.\n#................#C.\n..##...#....#.......\n"
+}
