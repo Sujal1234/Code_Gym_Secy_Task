@@ -47,7 +47,7 @@ One of the following situations may arise:
 
 * All the crystals in the area are gone (either collected or destroyed). In this case the player with the **greater number of crystals** wins. If both players have the same number of crystals, the player with the **higher HP** remaining wins. If both players have the same **HP** it is a tie.
 
-* 250 turns have passed. In this case again the player with the **greater number of crystals** wins. If both players have the same number of crystals, the player with the **higher HP** remaining wins. If both players have the same $HP$ it is a **tie**.
+* 100 turns have passed. In this case again the player with the **greater number of crystals** wins. If both players have the same number of crystals, the player with the **higher HP** remaining wins. If both players have the same $HP$ it is a **tie**.
 
 
 

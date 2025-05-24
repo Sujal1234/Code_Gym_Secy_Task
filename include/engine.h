@@ -12,7 +12,7 @@
 #include <set>
 
 constexpr int GRID_SIZE = 20;
-constexpr int MAX_TURNS = 250;
+constexpr int MAX_TURNS = 100;
 constexpr int INITIAL_HP = 5;
 constexpr int BOMB_RANGE = 3; //Including placed cell
 constexpr int ATTACK_RANGE = 3; //Including placed cell
