@@ -1,4 +1,5 @@
 #include "../include/engine.h"
+#include "../include/nlohmann_json.hpp"
 #include <iostream>
 #include <random>
 #include <string>
@@ -212,10 +213,12 @@ void Engine::processTurn(std::string_view player1Input, std::string_view player2
    PlayerMove player1Move, player2Move;
 
    if(!parseMove(player1Input, player1Move)){
-       player1Lost = true;;
+       player1Lost = true;
+       player1MoveError = true;
    }
    if(!parseMove(player2Input, player2Move)){
        player2Lost = true;
+       player2MoveError = true;
    }
 
    bool player1Bombed {true}, player2Bombed {true};
@@ -357,8 +360,11 @@ void Engine::processTurn(std::string_view player1Input, std::string_view player2
     //Now we need to check if game is over
     currentTurn++;
     if(checkGameOver()){
+        logTurn(player1Move, player2Move);
+        writeLogs();
         return;
     }
+    logTurn(player1Move, player2Move);
 }
 
 //To be used when both players have provided correct input and already moved
@@ -475,7 +481,10 @@ bool Engine::checkGameOver(){
 
 //Used if there is an error while reading input from the players
 //This is not for invalid input but rather errors in the input reading process itself
-void Engine::inputReadError(bool player1Error, bool player2Error){
+void Engine::outputReadError(bool player1Error, bool player2Error){
+    player1OutputReadError = player1Error;
+    player2OutputReadError = player2Error;
+
     assert(player1Error || player2Error);
 
     if(player1Error) player1Lost = true;
@@ -515,6 +524,37 @@ void Engine::collectCrystals(int player,
     }
 }
 
+std::string Engine::getGridString() const{
+    std::string gridStr;
+    for (int y = 0; y < GRID_SIZE; y++)
+    {
+        for (int x = 0; x < GRID_SIZE; x++)
+        {
+            if (x == player1X && y == player1Y)
+                gridStr += '1';
+            else if (x == player2X && y == player2Y)
+                gridStr += '2';
+            else
+                gridStr += grid[y][x];
+        }
+        gridStr += '\n';
+    }
+    return gridStr;
+}
+
+std::string Engine::getGridStringPlayersHidden() const{
+    std::string gridStr;
+    for (int y = 0; y < GRID_SIZE; y++)
+    {
+        for (int x = 0; x < GRID_SIZE; x++)
+        {
+            gridStr += grid[y][x];
+        }
+        gridStr += '\n';
+    }
+    return gridStr;
+}
+
 void Engine::printGrid() const {
     for (int y = 0; y < GRID_SIZE; y++)
     {
@@ -537,6 +577,76 @@ void Engine::printEndReason() const {
     }
     else{
         std::cout << "Game is still ongoing.\n";
+    }
+}
+
+void Engine::logTurn(PlayerMove& player1Move, PlayerMove& player2Move)
+{
+    assert(getCurrentTurn() > 0);
+    //Add grid if first move
+    if(getCurrentTurn() == 1){
+        logs["grid"] = getGridString();
+    }
+
+    json turn;
+
+    //If error in the input format or while reading the input then set all moves to "ERROR"
+    if(player1OutputReadError){
+        turn["Player 1"] = {
+            {"MOVE", "ERROR"},
+            {"BOMB", "ERROR"},
+            {"ATTACK", "ERROR"}
+        };
+    }
+    else{
+        turn["Player 1"] = {
+            {"MOVE", player1Move.dir},
+            {"BOMB", std::make_pair(player1Move.bombX, player1Move.bombY)},
+            {"ATTACK", std::make_pair(player1Move.attackX, player1Move.attackY)}
+        };
+    }
+    if(player2OutputReadError){
+        turn["Player 2"] = {
+            {"MOVE", "ERROR"},
+            {"BOMB", "ERROR"},
+            {"ATTACK", "ERROR"}
+        };
+    }
+    else{
+        turn["Player 2"] = {
+            {"MOVE", player2Move.dir},
+            {"BOMB", std::make_pair(player2Move.bombX, player2Move.bombY)},
+            {"ATTACK", std::make_pair(player2Move.attackX, player2Move.attackY)}
+        };
+    }
+    //Check if game over to add the end reason and player winners
+    if(gameOver){
+        turn["Game status"] = "Game Over";
+        turn["End reason"] = endReason;
+        if(player1Lost && player2Lost){
+            turn["Winners"] = "None (Tie)";
+        }
+        else if(player1Lost){
+            turn["Winners"] = "Player 2";
+        }
+        else{
+            turn["Winners"] = "Player 1";
+        }
+    }
+    else{
+        turn["Game status"] = "Ongoing";
+    }
+    
+    logs["Turn " + std::to_string(getCurrentTurn())] = turn;
+}
+
+void Engine::writeLogs() {
+    std::ofstream f(logsFilePath);
+    if (f.is_open()) {
+        f << logs.dump(4); //Pretty print with 4 spaces
+        f.close();
+    } else {
+        std::cerr << "Error opening logs file: " << logsFilePath << std::endl;
     }
 }
 

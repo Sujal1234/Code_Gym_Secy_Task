@@ -47,6 +47,11 @@ private:
     int player1BombCooldown {}, player1AttackCooldown {};
     int player2BombCooldown {}, player2AttackCooldown {};
 
+    bool player1OutputReadError {false};
+    bool player2OutputReadError {false};
+    bool player1MoveError {false};
+    bool player2MoveError {false};
+
     int totalCrystals;
     int currentTurn {};
     
@@ -89,10 +94,12 @@ private:
     bool checkGameOver();
 
     //Adds log of this turn to logs json object.
-    void logTurn();
+    //player1Error flag to be set if there was either an error while reading
+    //their input, the input format was invalid or the move made was invalid.
+    void logTurn(PlayerMove& player1Move, PlayerMove& player2Move);
 
     //Writes the logs to the appropriate logs file.
-    void flushLogs();
+    void writeLogs();
 
     void collectCrystals(int player,
     std::set<std::pair<int, int>>& explosionArea,
@@ -113,10 +120,13 @@ public:
 
     //Use when the input received from (a) player(s) is invalid.
     //Accordingly set the game state and end reason.
-    void inputReadError(bool player1Error, bool player2Error);
+    void outputReadError(bool player1Error, bool player2Error);
     
     //Getter functions
     std::array<std::array<char, GRID_SIZE>, GRID_SIZE> getGrid() const;
+    std::string getGridStringPlayersHidden() const;
+    std::string getGridString() const;
+
     int getTotalCrystals() const;
     bool isGameOver() const;
     int getCurrentTurn() const;

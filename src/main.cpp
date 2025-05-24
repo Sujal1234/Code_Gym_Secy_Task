@@ -117,7 +117,7 @@ void handleTurn(Engine& engine, bp::child& bot1, bp::child& bot2,
         std::cerr << "Error reading input after "
         << engine.getCurrentTurn() << " turn" << std::endl;
 
-        engine.inputReadError(bot1ReadError, bot2ReadError);
+        engine.outputReadError(bot1ReadError, bot2ReadError);
         abortProgram(engine, bot1, bot2);
     }
 
