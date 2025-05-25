@@ -1,5 +1,5 @@
 # Code_Gym_Secy_Task
-A game I created, to be played between bots. Details of the game can be found in README.md
+A game I created, to be played between bots. Details of the game can be found in Game_Description.md
 
 ## Build
 This is a cross-platform project that works on Windows, Linux and Mac OS (But tested only on Ubuntu).  
