@@ -3,7 +3,7 @@ A game I created, to be played between bots. Details of the game can be found in
 
 ## Build
 This is a cross-platform project that works on Windows, Linux and Mac OS (But tested only on Ubuntu).  
-The installation steps will be detailed mainly for Ubuntu but the same tools can be installed easily on the other operating systems.
+The installation steps will be detailed mainly for Linux but the same tools can be installed easily on the other operating systems.
 
 ### Prerequisites
 For compilation we need: `gcc`, `g++` (These are also necessary while running the final executable), `make` and the [Boost libraries](https://www.boost.org/).
